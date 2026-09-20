@@ -1,0 +1,15 @@
+NOTA 1: NULL
+La documentazione di List prevede, per alcuni metodi, la possibilità che determinate implementazioni non accettino elementi null. Nel caso di ListAdapter, tuttavia, si è scelto di considerare tale elemento come accettabile.
+Per questo motivo, sono stati eseguiti dei test method specifici per verificare la corretta gestione di null nei diversi metodi della lista, che non provochi eccezioni, salvo nei casi in cui l’eccezione sia dovuta ad altre condizioni non valide, come indici fuori limite o parametri collection/array nulli.
+
+NOTA 2: TOARRAY(OBJECT[] A)
+relativamente al metodo toArray(Object[] a), non è stato implementato il controllo completo del runtime type dell’array passato come parametro.
+Secondo la documentazione della Collection di Java, il metodo dovrebbe restituire un array dello stesso tipo runtime dell’array ricevuto come parametro e, nel caso in cui il tipo dell’array non sia compatibile con gli elementi della lista, dovrebbe poter generare ArrayStoreException.
+Nel progetto, tuttavia, l’implementazione è stata realizzata utilizzando solamente le funzionalità disponibili nell’ambiente CLDC 1.1, che non fornisce (secondo il progettista) strumenti sufficienti per creare dinamicamente un nuovo array mantenendo il tipo runtime specifico dell’array passato.
+Per questo motivo, nel caso in cui l’array fornito non abbia dimensione sufficiente, il metodo crea un nuovo array di tipo Object[] e non un array dello stesso tipo runtime del parametro. La documentazione dei test tiene conto di questa scelta implementativa.
+
+NOTA 3: ILLEGALSTATEEXCEPTION
+Poiché l’ambiente CLDC 1.1 non include esplicitamente java.lang.IllegalStateException, nei casi in cui la documentazione standard prevede IllegalStateException è stata utilizzata RuntimeException come eccezione runtime sostitutiva. 
+
+NOTA 4: WARNING
+Relativamente alla generazione della documentazione Javadoc, come richiesto dalla consegna essa è stata prodotta per il codice del progetto. Alcuni warning relativi all’assenza di commenti sono dovuti al fatto che non tutti gli elementi sono stati documentati tramite Javadoc: per le interfacce, utilizzate principalmente per rispettare la struttura richiesta ed evitare ambiguità di omonimia con le classi standard, è stata ritenuta sufficiente la chiarezza delle firme dei metodi; per le classi di test, invece, si è scelto di fornire una documentazione esterna in formato PDF, più estesa e leggibile rispetto ai commenti Javadoc. 
